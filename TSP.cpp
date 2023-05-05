@@ -16,15 +16,20 @@ void TSP::readSmallDataSet(const string& filename) {
     string line;
     int origem,destino;
     double distancia;
-
-    while(s.peek() != EOF){
-        getline(s,line,s.widen(','));
+    getline(s,line);
+    while(getline(s,line)){
+        stringstream ss(line);
+        getline(ss,line,',');
         origem = stoi(line);
-        getline(s,line,s.widen(','));
+        getline(ss,line,',');
         destino = stoi(line);
-        getline(s,line,s.widen(','));
+        getline(ss,line,',');
         distancia = stod(line);
         graph->addVertex(origem);
+        auto v1 = graph->findVertex(destino);
+        if(v1 == nullptr){
+            graph->addVertex(destino);
+        }
         graph->addEdge(origem,destino,distancia);
     }
 

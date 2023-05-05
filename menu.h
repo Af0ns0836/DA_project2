@@ -11,7 +11,9 @@ class Menu {
 public:
     static void menu();
     static void menu1(TSP *tsp);
-
+    static void menu2(TSP *tsp);
+    static void menu3(TSP *tsp);
+    static void menu4(TSP *tsp);
 };
 
 #endif //DA_PROJECT2_MENU_H

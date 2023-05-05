@@ -3,12 +3,11 @@
 //
 
 #include "menu.h"
-#include "TSP.cpp"
+#include "TSP.h"
 
 using namespace std;
 
 void Menu::menu(){
-    string stations = "../data/stations.csv", network = "../data/network.csv";
     TSP tsp = TSP();
 
     bool end = false;
@@ -22,13 +21,20 @@ void Menu::menu(){
         cout << "Enter the respective number: ";
         cin >> option;
         if(option == 'q') end = true;
-        else if(option == '1'){
-            menu1(&tsp);
+        switch (option) {
+            case '1':
+                menu1(&tsp);
+                break;
+            case '2':
+                menu2(&tsp);
+                break;
+            case '3':
+                menu3(&tsp);
+                break;
+            case '4':
+                menu4(&tsp);
+                break;
         }
-        /*else if(option == '2'){
-            menu2(&tn);
-        }*/
-
     }
 }
 void Menu::menu1(TSP *tsp) {
@@ -47,9 +53,9 @@ void Menu::menu1(TSP *tsp) {
         cout << "Enter the respective number: ";
         cin >> option;
         switch (option) {
-            case 1:
+            case '1':
                 tsp->readSmallDataSet("shipping.csv"); break;
-            case 2:
+            /*case 2:
                 tsp->readSmallDataSet("stadiums.csv"); break;
             case 3:
                 tsp->readSmallDataSet("tourism.csv"); break;
@@ -58,10 +64,64 @@ void Menu::menu1(TSP *tsp) {
             case 5:
                 tsp->readSmallDataSet("shipping.csv"); break;
             case 6:
-                tsp->readSmallDataSet("shipping.csv"); break;
+                tsp->readSmallDataSet("shipping.csv"); break;*/
             default:
                 end = true;
                 break;
+        }
+    }
+}
+
+void Menu::menu2(TSP *tsp) {
+    bool end = false;
+    char option;
+    while(!end){
+        cout << "#############################" << endl;
+        cout << "#  Backtracking algorithm   #" << endl;
+        cout << "#############################" << endl;
+        cout << "1.Choose the dataset" << endl;
+        cout << "Enter q to terminate the program or to return to a previous menu" << endl;
+        cout << "Enter the respective number: ";
+        cin >> option;
+        if(option == 'q') end = true;
+        else if(option == '1'){
+
+        }
+    }
+}
+
+void Menu::menu3(TSP *tsp) {
+    bool end = false;
+    char option;
+    while(!end){
+        cout << "######################################" << endl;
+        cout << "# Triangular Approximation Heuristic #" << endl;
+        cout << "######################################" << endl;
+        cout << "1.Choose the dataset" << endl;
+        cout << "Enter q to terminate the program or to return to a previous menu" << endl;
+        cout << "Enter the respective number: ";
+        cin >> option;
+        if(option == 'q') end = true;
+        else if(option == '1'){
+
+        }
+    }
+}
+
+void Menu::menu4(TSP *tsp) {
+    bool end = false;
+    char option;
+    while(!end){
+        cout << "############################" << endl;
+        cout << "#     Other Heuristics     #" << endl;
+        cout << "############################" << endl;
+        cout << "1.Choose the dataset" << endl;
+        cout << "Enter q to terminate the program or to return to a previous menu" << endl;
+        cout << "Enter the respective number: ";
+        cin >> option;
+        if(option == 'q') end = true;
+        else if(option == '1'){
+
         }
     }
 }
