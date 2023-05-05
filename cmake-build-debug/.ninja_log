@@ -1,0 +1,11 @@
+# ninja log v5
+3	545	7050116173128660	CMakeFiles/DA_project2.dir/main.cpp.obj	3dc6740a7b5a4c38
+13	656	7050116174247811	CMakeFiles/DA_project2.dir/menu.cpp.obj	2ca370e509e31c34
+8	603	7050116173719054	CMakeFiles/DA_project2.dir/TSP.cpp.obj	2e12ad22b1f76cc4
+6	731	7050110150559489	CMakeFiles/DA_project2.dir/Graph.cpp.obj	d60c10a34b5be302
+31	759	7050110150860450	CMakeFiles/DA_project2.dir/VertexEdge.cpp.obj	2112302c3ba8b60d
+7	626	7050119940688135	CMakeFiles/DA_project2.dir/main.cpp.obj	50d583d51002cc84
+0	769	7050119942056739	CMakeFiles/DA_project2.dir/Graph.cpp.obj	c8a9be59b9a72b9e
+24	795	7050119942410889	CMakeFiles/DA_project2.dir/TSP.cpp.obj	5c0e9260e17b2469
+12	826	7050119942637872	CMakeFiles/DA_project2.dir/VertexEdge.cpp.obj	86e8a089eb9e3461
+17	864	7050119943109868	CMakeFiles/DA_project2.dir/menu.cpp.obj	43432bace31cbea4
