@@ -2,7 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "DA_project2"
+			"path" : "DA_project2.exe"
+		},
+		{
+			"path" : "DA_project2.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -52,7 +55,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/home/afonso/Desktop/School/DA/DA_project2/."
+					"path" : "C:/Users/dias4/Desktop/curso/2-ano/DA/DA_project2/."
 				}
 			],
 			"language" : "CXX",
@@ -86,12 +89,16 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "DA_project2",
-	"nameOnDisk" : "DA_project2",
+	"nameOnDisk" : "DA_project2.exe",
 	"paths" : 
 	{
 		"build" : ".",

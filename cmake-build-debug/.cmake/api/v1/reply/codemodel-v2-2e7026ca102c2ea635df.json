@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.23.2"
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "DA_project2::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-DA_project2-Debug-a5b687efd1f03fc7d2b5.json",
+					"jsonFile" : "target-DA_project2-Debug-74cc7cb49b65d3e222dc.json",
 					"name" : "DA_project2",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug",
-		"source" : "/home/afonso/Desktop/School/DA/DA_project2"
+		"build" : "C:/Users/dias4/Desktop/curso/2-ano/DA/DA_project2/cmake-build-debug",
+		"source" : "C:/Users/dias4/Desktop/curso/2-ano/DA/DA_project2"
 	},
 	"version" : 
 	{

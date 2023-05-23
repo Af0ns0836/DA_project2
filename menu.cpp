@@ -17,6 +17,7 @@ void Menu::menu(){
         cout << "#         MAIN MENU         #" << endl;
         cout << "#############################" << endl;
         cout << "1.Choose the dataset" << endl;
+        cout << "2.Backtracking" << endl;
         cout << "Enter q to terminate the program or to return to a previous menu" << endl;
         cout << "Enter the respective number: ";
         cin >> option;
@@ -26,7 +27,7 @@ void Menu::menu(){
                 menu1(&tsp);
                 break;
             case '2':
-                menu2(&tsp);
+                tsp.backtracking(0,0,INT_MAX);
                 break;
             case '3':
                 menu3(&tsp);
@@ -53,10 +54,15 @@ void Menu::menu1(TSP *tsp) {
             case '1':
                 cout << "Write the name of the file: ";
                 cin >> filename;
-                tsp->readSmallDataSet(filename); break;
+                tsp->readSmallDataSet(filename);
+                end = true;
+                break;
             case '2':
                 cout << "Write the name of the file: ";
-                tsp->readBigDataSet(filename); break;
+                cin >> filename;
+                tsp->readBigDataSet(filename);
+                end = true;
+                break;
             default:
                 end = true;
                 break;
@@ -64,23 +70,7 @@ void Menu::menu1(TSP *tsp) {
     }
 }
 
-void Menu::menu2(TSP *tsp) {
-    bool end = false;
-    char option;
-    while(!end){
-        cout << "#############################" << endl;
-        cout << "#  Backtracking algorithm   #" << endl;
-        cout << "#############################" << endl;
-        cout << "1.Choose the dataset" << endl;
-        cout << "Enter q to terminate the program or to return to a previous menu" << endl;
-        cout << "Enter the respective number: ";
-        cin >> option;
-        if(option == 'q') end = true;
-        else if(option == '1'){
 
-        }
-    }
-}
 
 void Menu::menu3(TSP *tsp) {
     bool end = false;
