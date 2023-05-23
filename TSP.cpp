@@ -32,21 +32,71 @@ void TSP::readSmallDataSet(const string& filename) {
         }
         graph->addEdge(origem,destino,distancia);
     }
-
 }
 
-void TSP::readBigDataSet(const string& filename) {
-    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/graph1/nodes.csv");
+void TSP::readMediumDataSet(const string& filename) {
+
+    ifstream s(filename);
     string line;
     int origem,destino;
     double distancia;
-
-    while(s.peek() != EOF){
-        getline(s,line,s.widen(','));
+    while(getline(s,line)){
+        stringstream ss(line);
+        getline(ss,line,',');
         origem = stoi(line);
+        getline(ss,line,',');
+        destino = stoi(line);
+        getline(ss,line,',');
+        distancia = stod(line);
         graph->addVertex(origem);
-        //graph->addEdge(origem,destino,distancia);
+        auto v1 = graph->findVertex(destino);
+        if(v1 == nullptr){
+            graph->addVertex(destino);
+        }
+        graph->addEdge(origem,destino,distancia);
     }
+}
+
+
+void TSP::readBigDataSetNodes(const string& filename) {
+    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/graph1/nodes.csv");
+    string line;
+    int id;
+    double latitude,longitude;
+    getline(s,line);
+    while(getline(s,line)){
+        stringstream ss(line);
+        getline(ss,line,',');
+        id = stoi(line);
+        getline(ss,line,',');
+        latitude = stoi(line);
+        getline(ss,line,',');
+        longitude = stod(line);
+        graph->addVertex(id);
+        graph->findVertex(id)->setLatLon(latitude,longitude);
+    }
+}
+
+void TSP::readBigDataSetEdges(const string &filename) {
+    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/graph1/edges.csv");
+    string line;
+    int origem,destino;
+    double distancia;
+    getline(s,line);
+    while(getline(s,line)){
+        stringstream ss(line);
+        getline(ss,line,',');
+        origem = stoi(line);
+        getline(ss,line,',');
+        destino = stoi(line);
+        getline(ss,line,',');
+        distancia = stod(line);
+        graph->addEdge(origem,destino,distancia);
+    }
+}
+void TSP::readBigDataSet(const string& filename){
+    readBigDataSetNodes(filename + "/nodes.csv");
+    readBigDataSetEdges(filename + "/edges.csv");
 }
 
 Graph *TSP::getGraph(){

@@ -32,6 +32,8 @@ public:
     void setVisited(bool visited);
     void setDist(double dist);
     void setPath(Edge *path);
+    void setLatLon(double lat, double lon);
+    //void setLon(double lon);
     Edge * addEdge(Vertex *dest, double w);
 
     friend class MutablePriorityQueue<Vertex>;
@@ -42,7 +44,8 @@ protected:
     bool visited = false; // used by DFS, BFS, Prim ...
     double dist = 0;
     Edge *path = nullptr;
-
+    double lat = 0;
+    double lon = 0;
     std::vector<Edge *> incoming; // incoming edges
 
     int queueIndex = 0; 		// required by MutablePriorityQueue and UFDS

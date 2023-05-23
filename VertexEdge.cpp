@@ -63,6 +63,11 @@ void Vertex::setPath(Edge *path) {
     this->path = path;
 }
 
+void Vertex::setLatLon(double lat, double lon){
+    this->lat = lat;
+    this->lon = lon;
+}
+
 
 /********************** Edge  ****************************/
 

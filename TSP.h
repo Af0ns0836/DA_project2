@@ -18,7 +18,10 @@ public:
 
     TSP();
     void readSmallDataSet(const string& filename);
+    void readMediumDataSet(const string& filename);
     void readBigDataSet(const string& filename);
+    void readBigDataSetNodes(const string& filename);
+    void readBigDataSetEdges(const string& filename);
     Graph * getGraph();
 
 };

@@ -40,31 +40,23 @@ void Menu::menu(){
 void Menu::menu1(TSP *tsp) {
     bool end = false;
     char option;
+    string filename;
     while (!end) {
         cout << "#############################" << endl;
         cout << "#      Select dataset       #" << endl;
         cout << "#############################" << endl;
-        cout << "1.Shipping(Toy-Graph)" << endl;
-        cout << "2.Stadiums(Toy-Graph)" << endl;
-        cout << "3.Tourism(Toy-Graph)" << endl;
-        cout << "4.graph1(real-world)" << endl;
-        cout << "5.graph2(real-world)" << endl;
-        cout << "6.graph3(real-world)" << endl;
-        cout << "Enter the respective number: ";
+        cout << "1->The small graphs are the following: shipping, stadiums, tourism." << endl;
+        cout << "2->The real world graphs are the following: graph1, graph2, graph3." << endl;
+        cout << "Choose the type of graph( 1 or 2 ): ";
         cin >> option;
         switch (option) {
             case '1':
-                tsp->readSmallDataSet("shipping.csv"); break;
-            /*case 2:
-                tsp->readSmallDataSet("stadiums.csv"); break;
-            case 3:
-                tsp->readSmallDataSet("tourism.csv"); break;
-            case 4:
-                tsp->readSmallDataSet("shipping.csv"); break;
-            case 5:
-                tsp->readSmallDataSet("shipping.csv"); break;
-            case 6:
-                tsp->readSmallDataSet("shipping.csv"); break;*/
+                cout << "Write the name of the file: ";
+                cin >> filename;
+                tsp->readSmallDataSet(filename); break;
+            case '2':
+                cout << "Write the name of the file: ";
+                tsp->readBigDataSet(filename); break;
             default:
                 end = true;
                 break;
