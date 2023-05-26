@@ -20,15 +20,28 @@ void Menu::menu(){
         cout << "2.Backtracking" << endl;
         cout << "Enter q to terminate the program or to return to a previous menu" << endl;
         cout << "Enter the respective number: ";
-        cin >> option;
+        //cin >> option;
         if(option == 'q') end = true;
+        option = '2';
         switch (option) {
             case '1':
                 menu1(&tsp);
                 break;
-            case '2':
-                tsp.backtracking(0,0,INT_MAX);
+            case '2':{
+                string filename ="stadiums";
+                tsp.readSmallDataSet(filename);
+                auto paths = tsp.getPaths();
+               for(int i = 0; i < paths.size(); i++){
+                   if(i == paths.size() - 1){
+                       cout << paths[i];
+                   }
+                   else
+                       cout << paths[i] << "-->";
+                }
+                cout << endl;
+                end = true;
                 break;
+            }
             case '3':
                 menu3(&tsp);
                 break;
