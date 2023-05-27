@@ -13,7 +13,6 @@ class TSP{
 
 private:
     Graph* graph;
-    vector<double> paths;
 
 public:
 
@@ -23,10 +22,11 @@ public:
     void readBigDataSet(const string& filename);
     void readBigDataSetNodes(const string& filename);
     void readBigDataSetEdges(const string& filename);
-    double backtracking(int count, double cost, double& ans, int id, vector<double> paths);
-    vector<double> setPath(vector<double> paths);
-    vector<double> getPaths();
     Graph * getGraph();
+    void backtracking(int count, double cost, double& ans, int id,vector<int>& paths,vector<int>& minPath);
+    //void setPath(vector<double> paths);
+    double getPaths();
+
 };
 
 #endif //DA_PROJECT2_TSP_H

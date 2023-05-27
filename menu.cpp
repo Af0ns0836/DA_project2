@@ -30,15 +30,7 @@ void Menu::menu(){
             case '2':{
                 string filename ="stadiums";
                 tsp.readSmallDataSet(filename);
-                auto paths = tsp.getPaths();
-               for(int i = 0; i < paths.size(); i++){
-                   if(i == paths.size() - 1){
-                       cout << paths[i];
-                   }
-                   else
-                       cout << paths[i] << "-->";
-                }
-                cout << endl;
+                cout << tsp.getPaths();
                 end = true;
                 break;
             }

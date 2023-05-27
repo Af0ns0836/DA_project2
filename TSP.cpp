@@ -3,6 +3,9 @@
 //
 
 #include "TSP.h"
+
+#include <utility>
+#include <tuple>
 #include "sstream"
 #include "fstream"
 #include "stack"
@@ -31,7 +34,8 @@ void TSP::readSmallDataSet(const string& filename) {
         if(v1 == nullptr){
             graph->addVertex(destino);
         }
-        graph->addEdge(origem,destino,distancia);
+        //graph->addEdge(origem,destino,distancia);
+        graph->addBidirectionalEdge(origem,destino,distancia);
     }
 }
 
@@ -54,7 +58,7 @@ void TSP::readMediumDataSet(const string& filename) {
         if(v1 == nullptr){
             graph->addVertex(destino);
         }
-        graph->addEdge(origem,destino,distancia);
+        graph->addBidirectionalEdge(origem,destino,distancia);
     }
 }
 
@@ -92,7 +96,7 @@ void TSP::readBigDataSetEdges(const string &filename) {
         destino = stoi(line);
         getline(ss,line,',');
         distancia = stod(line);
-        graph->addEdge(origem,destino,distancia);
+        graph->addBidirectionalEdge(origem,destino,distancia);
     }
 }
 void TSP::readBigDataSet(const string& filename){
@@ -104,46 +108,49 @@ Graph *TSP::getGraph(){
     return graph;
 }
 
-double TSP::backtracking(int count, double cost, double& ans, int id,vector<double> paths) {
+void TSP::backtracking(int count, double cost, double& ans, int id,vector<int>& paths,vector<int>& minPath) {
     int n = getGraph()->getNumVertex(); // size of the graph
     auto vertex = graph->findVertex(id);
-    if (count == n) {
-        if (!vertex->isVisited()) {
-            vertex->setVisited(true);
-            for (auto edge: vertex->getAdj()) {
-                if(!edge->getOrig()->isVisited()){
-                    cost+= edge->getWeight();
-                }
-                paths.push_back(edge->getOrig()->getId());
-                setPath(paths);
+    if (count == n-1) {
+        for (auto edge: vertex->getAdj()) {
+            if (edge->getDest()->getId() == 0) {
+                cost += edge->getWeight();
+                break;
             }
         }
-        ans = min(ans, cost);
-        return ans;
-    }
-
-    if (!vertex->isVisited()) {
-        vertex->setVisited(true);
-        for (auto edge : vertex->getAdj()) {
-            paths.push_back(edge->getOrig()->getId());
-            setPath(paths);
-            backtracking(count + 1, cost + edge->getWeight(), ans, id + 1,paths);
-            paths.pop_back(); // Remove the last added weight from paths
+        if(cost < ans){
+            ans = cost;
+            minPath = paths;
+            minPath.push_back(id);
         }
-        vertex->setVisited(false);
+        return;
     }
 
+    for (auto edge : vertex->getAdj()) {
+        if(!edge->getDest()->isVisited()){
+            edge->getDest()->setVisited(true);
+            paths.push_back(vertex->getId());
+            backtracking(count + 1, cost + edge->getWeight(), ans, edge->getDest()->getId(),paths,minPath);
+            paths.pop_back();
+            edge->getDest()->setVisited(false);
+        }
+    }
+}
+
+double TSP::getPaths()
+{
+    double ans = numeric_limits<double>::max();
+    graph->findVertex(0)->setVisited(true);
+    vector<int> path;
+    vector<int> minPath;
+    backtracking(0,0.0,ans,0,path,minPath);
+    for(auto p : minPath){
+        cout << p << "-->";
+    }
+    cout << endl;
     return ans;
 }
 
-
-vector<double> TSP::getPaths()
-{
-    double maxd = numeric_limits<double>::max();
-    cout << backtracking(1,0.0,maxd,0,paths) << endl;
-    return paths;
-}
-
-vector<double> TSP::setPath(vector<double> paths) {
-    return this->paths = paths;
-}
+/*void TSP::setPath(vector<double> paths) {
+    this->path = paths;
+}*/
