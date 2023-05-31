@@ -26,6 +26,7 @@ public:
     void backtracking(int count, double cost, double& ans, int id,vector<int>& paths,vector<int>& minPath);
     //void setPath(vector<double> paths);
     double getPaths();
+    double triangularApproximation();
 
 };
 

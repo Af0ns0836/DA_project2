@@ -65,4 +65,79 @@ bool Graph::addBidirectionalEdge(const int &sourc, const int &dest, double w) {
     return true;
 }
 
+void Graph::MST(std::vector<int>& parent) {
 
+
+    std::vector<double> key(getNumVertex(), std::numeric_limits<double>::max()); //Tracks values of the
+    std::vector<bool> inMST(getNumVertex(), false); //Tracks vertices already in the MST
+
+    // Root value
+    int startVertex = 0;
+
+    //Start key vector with the key value
+    key[startVertex] = 0.0;
+
+    for (int count = 0; count < getNumVertex() - 1; ++count) {
+        int u = minKey(key, inMST);
+        inMST[u] = true;
+
+        // Update key and parent index of adjacent vertices
+        for (auto edge : findVertex(u)->getAdj()) {
+            int v = edge->getDest()->getId();
+            double weight = edge->getWeight();
+
+
+            if (!inMST[v] && weight < key[v]) {
+                parent[v] = u;
+                key[v] = weight;
+            }
+        }
+    }
+
+    // Print the MST
+    std::cout << "Minimum Spanning Tree:" << std::endl;
+    for (int i = 1; i < getNumVertex(); ++i) {
+        std::cout << parent[i] << " - " << i << std::endl;
+    }
+
+}
+
+void Graph::DFS(int current, const std::vector<int> &parent, std::vector<bool> &visited, std::stack<int> &cityStack, std::vector<int> &path) {
+    visited[current] = true;
+    cityStack.push(current);
+
+    while (!cityStack.empty()) {
+        int city = cityStack.top();
+        cityStack.pop();
+
+        // Process the city or print its order
+        path.push_back(city);
+
+        for (int neighbor = 0; neighbor < parent.size(); ++neighbor) {
+            if (parent[neighbor] == city && !visited[neighbor]) {
+                visited[neighbor] = true;
+                cityStack.push(neighbor);
+            }
+        }
+    }
+}
+
+int Graph::minKey(std::vector<double> &key, std::vector<bool> &inMST){
+    double min = std::numeric_limits<double>::max();
+    int minValue = -1; //Minimum value possible
+    int numVertices = key.size();
+
+    for (int v = 0; v < numVertices; ++v) {
+        if (!inMST[v] && key[v] < min) {
+            min = key[v];
+            minValue = v;
+        }
+    }
+
+    return minValue;
+}
+
+
+double Graph::totalDistance(const std::vector<int> &path) {
+    //TODO
+}

@@ -8,6 +8,7 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
+#include <stack>
 #include "MutablePriorityQueue.h"
 
 #include "VertexEdge.h"
@@ -34,6 +35,12 @@ public:
     bool addBidirectionalEdge(const int &sourc, const int &dest, double w);
     int getNumVertex() const;
     std::vector<Vertex *> getVertexSet() const;
+    void MST(std::vector<int>& parent);
+    void DFS(int current, const std::vector<int> &parent, std::vector<bool> &visited, std::stack<int> &cityStack, std::vector<int> &path);
+    int minKey(std::vector<double> &key, std::vector<bool> &inMST);
+    double totalDistance(const std::vector<int> &path);
+
+
 protected:
     std::vector<Vertex *> vertexSet;    // vertex set
     /*
