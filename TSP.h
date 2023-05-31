@@ -38,6 +38,7 @@ public:
     vector<int> generate_initial_solution(double& min_distance);
     vector<int> nearest_neighbor();
     double DFS(vector<int> &canSol,int id);*/
+    double triangularApproximation();
 
 };
 

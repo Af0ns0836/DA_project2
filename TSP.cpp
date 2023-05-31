@@ -417,3 +417,36 @@ vector<int> TSP::nearest_neighbor() {
 
     return solution;
 }*/
+
+double TSP::triangularApproximation() {
+    // PRIM'S ALGORITHM - Find the Minimum Spamming Tree
+    vector<int> par(graph->getNumVertex(), -1);
+    graph->MST(par);
+
+
+    // DFS - Find the order of visited vertices
+    vector<bool> visitedVertices(graph->getNumVertex(), false);
+    vector<int> pathValues;
+    stack<int> cityStack;
+    graph->DFS(0, par, visitedVertices, cityStack, pathValues);
+
+    // PREORDER - Print the order of visited cities
+    cout << "Path of visited vertices: ";
+    for (int x = 0; x < pathValues.size(); ++x) {
+        cout << pathValues[x];
+        if (x != pathValues.size() - 1)
+            cout << " -> ";
+    }
+    cout << " -> 0"<< endl;
+
+    //TODO - Find the distance
+    double total_distance = graph->totalDistance(pathValues);
+
+    //return total_distance;
+    return 0;
+}
+
+/*void TSP::setPath(vector<double> paths) {
+    this->path = paths;
+}*/
+

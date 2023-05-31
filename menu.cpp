@@ -18,19 +18,32 @@ void Menu::menu(){
         cout << "#############################" << endl;
         cout << "1.Choose the dataset" << endl;
         cout << "2.Backtracking" << endl;
+        cout << "3.Triangular Approximation" << endl;
         cout << "Enter q to terminate the program or to return to a previous menu" << endl;
         cout << "Enter the respective number: ";
-        //cin >> option;
+        cin >> option;
         if(option == 'q') end = true;
-        option = '4';
+
         switch (option) {
             case '1':
                 menu1(&tsp);
                 break;
             case '2':{
+
                 string filename ="shipping";
                 tsp.readSmallDataSet(filename);
                 cout << tsp.getPaths();
+
+                //string filename ="tourism";
+                //tsp.readSmallDataSet(filename);
+
+                clock_t zero = clock();
+
+                cout << tsp.getPaths() << endl;
+
+                clock_t end = clock();
+                cout << "Time: " << double(end - zero) / CLOCKS_PER_SEC << " seconds" << endl;
+
                 end = true;
                 break;
             }
@@ -44,6 +57,16 @@ void Menu::menu(){
                 /*double ans;
                 tsp.simulatedAnnealing(ans);*/
                 tsp.printMST(tsp.MST());
+
+                clock_t zero = clock();
+
+                double ans = tsp.triangularApproximation();
+
+                clock_t end = clock();
+
+                cout << "Approximate Distance: " << ans << endl; //TODO
+                cout << "Time: " << double(end - zero) / CLOCKS_PER_SEC << " seconds" << endl;
+
                 end = true;
                 break;
         }
@@ -82,7 +105,7 @@ void Menu::menu1(TSP *tsp) {
 }
 
 
-
+/*
 void Menu::menu3(TSP *tsp) {
     bool end = false;
     char option;
@@ -118,3 +141,4 @@ void Menu::menu4(TSP *tsp) {
         }
     }
 }
+ */
