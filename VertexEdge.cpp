@@ -67,7 +67,20 @@ void Vertex::setLatLon(double lat, double lon){
     this->lat = lat;
     this->lon = lon;
 }
-
+double Vertex::getLat(){
+    return this->lat;
+}
+double Vertex::getLon() {
+    return this->lon;
+}
+bool Vertex::hasEdge(Vertex* vertex1, Vertex* vertex2) {
+    for (auto neighbor : vertex1->getAdj()) {
+        if (neighbor->getDest() == vertex2) {
+            return true;  // Found an edge
+        }
+    }
+    return false;  // Edge not found
+}
 
 /********************** Edge  ****************************/
 

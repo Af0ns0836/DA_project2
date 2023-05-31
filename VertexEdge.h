@@ -33,9 +33,11 @@ public:
     void setDist(double dist);
     void setPath(Edge *path);
     void setLatLon(double lat, double lon);
+    double getLat();
+    double getLon();
     //void setLon(double lon);
     Edge * addEdge(Vertex *dest, double w);
-
+    bool hasEdge(Vertex *vertex1, Vertex *vertex2);
     friend class MutablePriorityQueue<Vertex>;
 protected:
     int id;                // identifier

@@ -6,6 +6,7 @@
 #define DA_PROJECT2_TSP_H
 
 #include "Graph.h"
+#include "set"
 
 using namespace std;
 
@@ -24,8 +25,19 @@ public:
     void readBigDataSetEdges(const string& filename);
     Graph * getGraph();
     void backtracking(int count, double cost, double& ans, int id,vector<int>& paths,vector<int>& minPath);
-    //void setPath(vector<double> paths);
     double getPaths();
+    Graph* MST();
+    void printMST(Graph* mstGraph);
+    set<Vertex*> oddDegree(Graph* mstGraph);
+    Graph* oddGraph(set<Vertex*> odds);
+    double computeWeight(Vertex* u, Vertex* v);
+    double haversine(double lat1,double lon1,double lat2,double lon2);
+    void christofides();
+    /*vector<int> simulatedAnnealing(double& ans);
+    bool acceptanceFunction(double &t, double &vE);
+    vector<int> generate_initial_solution(double& min_distance);
+    vector<int> nearest_neighbor();
+    double DFS(vector<int> &canSol,int id);*/
 
 };
 

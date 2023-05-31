@@ -22,13 +22,13 @@ void Menu::menu(){
         cout << "Enter the respective number: ";
         //cin >> option;
         if(option == 'q') end = true;
-        option = '2';
+        option = '4';
         switch (option) {
             case '1':
                 menu1(&tsp);
                 break;
             case '2':{
-                string filename ="stadiums";
+                string filename ="shipping";
                 tsp.readSmallDataSet(filename);
                 cout << tsp.getPaths();
                 end = true;
@@ -38,7 +38,13 @@ void Menu::menu(){
                 menu3(&tsp);
                 break;
             case '4':
-                menu4(&tsp);
+                string filename = "graph1";
+                tsp.readMediumDataSet("edges_25");
+                //tsp.readBigDataSet(filename);
+                /*double ans;
+                tsp.simulatedAnnealing(ans);*/
+                tsp.printMST(tsp.MST());
+                end = true;
                 break;
         }
     }
