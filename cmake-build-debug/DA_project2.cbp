@@ -8,113 +8,113 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="DA_project2">
-				<Option output="/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/DA_project2" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug"/>
+				<Option output="C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/DA_project2.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/afonso/Desktop/School/DA/DA_project2/."/>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="C:/Users/35191/Desktop/DA_project2-main/."/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 DA_project2"/>
-					<CompileFile command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 DA_project2"/>
+					<CompileFile command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="DA_project2/fast">
-				<Option output="/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/DA_project2" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug"/>
+				<Option output="C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/DA_project2.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/afonso/Desktop/School/DA/DA_project2/."/>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="C:/Users/35191/Desktop/DA_project2-main/."/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 DA_project2/fast"/>
-					<CompileFile command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 DA_project2/fast"/>
+					<CompileFile command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j2 -f &quot;/home/afonso/Desktop/School/DA/DA_project2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/Graph.cpp">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/Graph.cpp">
 			<Option target="DA_project2"/>
 		</Unit>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/Graph.h">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/Graph.h">
 			<Option target="DA_project2"/>
 		</Unit>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/MutablePriorityQueue.h">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/MutablePriorityQueue.h">
 			<Option target="DA_project2"/>
 		</Unit>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/TSP.cpp">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/TSP.cpp">
 			<Option target="DA_project2"/>
 		</Unit>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/TSP.h">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/TSP.h">
 			<Option target="DA_project2"/>
 		</Unit>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/VertexEdge.cpp">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/VertexEdge.cpp">
 			<Option target="DA_project2"/>
 		</Unit>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/VertexEdge.h">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/VertexEdge.h">
 			<Option target="DA_project2"/>
 		</Unit>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/main.cpp">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/main.cpp">
 			<Option target="DA_project2"/>
 		</Unit>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/menu.cpp">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/menu.cpp">
 			<Option target="DA_project2"/>
 		</Unit>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/menu.h">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/menu.h">
 			<Option target="DA_project2"/>
 		</Unit>
-		<Unit filename="/home/afonso/Desktop/School/DA/DA_project2/CMakeLists.txt">
+		<Unit filename="C:/Users/35191/Desktop/DA_project2-main/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
