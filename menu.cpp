@@ -48,7 +48,7 @@ void Menu::menu(){
                 break;
             }
             case '3':
-                menu3(&tsp);
+                tsp.christofides();
                 break;
             case '4':
                 string filename = "graph1";

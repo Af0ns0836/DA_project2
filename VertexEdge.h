@@ -35,8 +35,9 @@ public:
     void setLatLon(double lat, double lon);
     double getLat();
     double getLon();
-    //void setLon(double lon);
     Edge * addEdge(Vertex *dest, double w);
+    bool removeEdge(int destID);
+    void deleteEdge(Edge *edge);
     bool hasEdge(Vertex *vertex1, Vertex *vertex2);
     friend class MutablePriorityQueue<Vertex>;
 protected:
@@ -49,10 +50,8 @@ protected:
     double lat = 0;
     double lon = 0;
     std::vector<Edge *> incoming; // incoming edges
-
     int queueIndex = 0; 		// required by MutablePriorityQueue and UFDS
 
-    void deleteEdge(Edge *edge);
 };
 
 /********************** Edge  ****************************/
@@ -68,7 +67,7 @@ public:
     double getFlow() const;
     void setSelected(bool selected);
     void setReverse(Edge *reverse);
-
+    void setVisited(bool visited);
 protected:
     Vertex * dest; // destination vertex
     double weight; // edge weight, can also be used for capacity
@@ -77,6 +76,7 @@ protected:
     // used for bidirectional edges
     Vertex *orig;
     Edge *reverse = nullptr;
+    bool visited = false;
 
 };
 
