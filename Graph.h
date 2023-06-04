@@ -9,9 +9,12 @@
 #include <limits>
 #include <algorithm>
 #include <stack>
+#include <unordered_map>
 #include "MutablePriorityQueue.h"
-
 #include "VertexEdge.h"
+#include <cmath>
+
+#define RADIUS (double) 6371000.0
 
 class Graph {
 public:
@@ -34,14 +37,18 @@ public:
     bool addEdge(const int &sourc, const int &dest, double w) const;
     bool addBidirectionalEdge(const int &sourc, const int &dest, double w);
     int getNumVertex() const;
-    std::vector<Vertex *> getVertexSet() const;
+    std::unordered_map<int, Vertex*> getVertexSet() const;
     void MST(std::vector<int>& parent);
     void DFS(int current, const std::vector<int> &parent, std::vector<bool> &visited, std::stack<int> &cityStack, std::vector<int> &path);
-    int minKey(std::vector<double> &key, std::vector<bool> &inMST);
     double totalDistance(const std::vector<int> &path);
     void resetNodes() const;
+    bool check_if_nodes_are_connected(int v1, int v2);
+    double toRadians(double degrees);
+    double haversine(double lat1, double lon1, double lat2, double lon2);
+
+
 protected:
-    std::vector<Vertex *> vertexSet;    // vertex set
+    std::unordered_map<int, Vertex*> vertexSet;    // vertex set
     /*
      * Finds the index of the vertex with a given content.
      */

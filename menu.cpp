@@ -48,7 +48,7 @@ void Menu::menu(){
 
                 clock_t ends = clock();
 
-                cout << "Approximate Distance: " << ans << endl; //TODO
+                cout << "Approximate Distance: " << ans << " meters" << endl;
                 cout << "Time: " << double(ends - zero) / CLOCKS_PER_SEC << " seconds" << endl;
 
                 end = true;
@@ -75,8 +75,8 @@ void Menu::menu1(TSP *tsp) {
         cout << "#      Select dataset       #" << endl;
         cout << "#############################" << endl;
         cout << "1->The small graphs are the following: shipping, stadiums, tourism." << endl;
-        cout << "3->The medium fully connected graphs" << endl;
-        cout << "2->The real world graphs are the following: graph1, graph2, graph3." << endl;
+        cout << "2->The medium fully connected graphs" << endl;
+        cout << "3->The real world graphs are the following: graph1, graph2, graph3." << endl;
         cout << "Choose the type of graph( 1 ,2 or 3): ";
         cin >> option;
         switch (option) {
