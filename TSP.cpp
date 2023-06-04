@@ -64,7 +64,7 @@ void TSP::readMediumDataSet(const string& filename) {
 
 
 void TSP::readBigDataSetNodes(const string& filename) {
-    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/graph1/nodes.csv");
+    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/"+filename);
     string line;
     int id;
     double latitude,longitude;
@@ -83,7 +83,7 @@ void TSP::readBigDataSetNodes(const string& filename) {
 }
 
 void TSP::readBigDataSetEdges(const string &filename) {
-    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/graph1/edges.csv");
+    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/"+filename);
     string line;
     int origem,destino;
     double distancia;
@@ -144,89 +144,12 @@ double TSP::getPaths()
     graph->findVertex(0)->setVisited(true);
     vector<int> path;
     vector<int> minPath;
-    backtracking(0,0.0,ans,0,path,minPath);
+    backtracking(1,0.0,ans,0,path,minPath);
     for(auto p : minPath){
         cout << p << "-->";
     }
     cout << endl;
     return ans;
-}
-Graph* TSP::MST() {
-    if (graph->getVertexSet().empty()) {
-        return nullptr;
-    }
-
-    Graph* mstGraph = new Graph();
-
-    // Reset auxiliary info
-    for (auto v : graph->getVertexSet()) {
-        v->setDist(INF);
-        v->setPath(nullptr);
-        v->setVisited(false);
-    }
-
-    // Start with an arbitrary vertex
-    Vertex* s = graph->getVertexSet().front();
-    s->setDist(0);
-
-    // Initialize priority queue
-    MutablePriorityQueue<Vertex> q;
-    q.insert(s);
-
-    // Process vertices in the priority queue
-    while (!q.empty()) {
-        auto v = q.extractMin();
-        v->setVisited(true);
-        mstGraph->addVertex(v->getId());
-        if (v->getPath() != nullptr) {
-            // Add the edge to the MST graph
-            mstGraph->addEdge(v->getPath()->getOrig()->getId(),v->getPath()->getDest()->getId(),v->getPath()->getWeight());
-        }
-
-        for (auto& e : v->getAdj()) {
-            Vertex* w = e->getDest();
-            if (!w->isVisited()) {
-                auto oldDist = w->getDist();
-                if (e->getWeight() < oldDist) {
-                    w->setDist(e->getWeight());
-                    w->setPath(e);
-                    if (oldDist == INF) {
-                        q.insert(w);
-                    }
-                    else {
-                        q.decreaseKey(w);
-                    }
-                }
-            }
-        }
-    }
-
-    return mstGraph;
-}
-double TSP::computeWeight(Vertex* u, Vertex* v) {
-
-    double lat1 = u->getLat();
-    double lon1 = u->getLon();
-    double lat2 = v->getLat();
-    double lon2 = v->getLon();
-
-    // Use the Haversine formula to calculate the distance
-    double distance = haversine(lat1, lon1, lat2, lon2); // Implement the Haversine formula
-
-    return distance;
-}
-double TSP::haversine(double lat1,double lon1,double lat2,double lon2){
-    double earth_R = 6371.0;
-    double lat1R = lat1 * M_PI / 180.0;
-    double lon1R = lon1 * M_PI / 180.0;
-    double lat2R = lat2 * M_PI / 180.0;
-    double lon2R = lon2 * M_PI / 180.0;
-    double dlat = lat2R - lat1R;
-    double dlon = lon2R - lon1R;
-    double a = sin(dlat/2) * sin(dlat/2) + cos(lat1R) * cos(lat2R) * sin(dlon/2) * sin(dlon/2);
-    double c = 2 * atan2(sqrt(a), sqrt(1-a));
-    double d = earth_R * c;
-    return d;
 }
 
 void TSP::nearestNeighborTSP() {
@@ -300,9 +223,7 @@ double TSP::triangularApproximation() {
     }
     cout << " -> 0"<< endl;
 
-    //TODO - Find the distance
     double total_distance = graph->totalDistance(pathValues);
 
-    //return total_distance;
-    return 0;
+    return total_distance;
 }
