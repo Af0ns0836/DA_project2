@@ -67,9 +67,7 @@ void Graph::resetNodes() const {
         }
     }
 }
-void Graph::setNumberEdges(int n) {
-    this->numberEdges = n;
-}
+
 bool Graph::addBidirectionalEdge(const int &sourc, const int &dest, double w) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
@@ -80,122 +78,6 @@ bool Graph::addBidirectionalEdge(const int &sourc, const int &dest, double w) {
     e1->setReverse(e2);
     e2->setReverse(e1);
     return true;
-}
-
-int Graph::getNumberEdges() {
-    return this->numberEdges;
-}
-void Graph::bfs() const {
-    // Get the source vertex
-    auto s = findVertex(0);
-    if (s == nullptr) {
-        return;
-    }
-
-    // Set that no vertex has been visited yet
-    for (auto v : vertexSet) {
-        v->setVisited(false);
-    }
-
-    // Perform the actual BFS using a queue
-    std::queue<Vertex *> q;
-    q.push(s);
-    s->setVisited(true);
-    while (!q.empty()) {
-        auto v = q.front();
-        q.pop();
-        for (auto & e : v->getAdj()) {
-            auto w = e->getDest();
-            if ( ! w->isVisited()) {
-                q.push(w);
-                w->setVisited(true);
-            }
-        }
-    }
-}
-bool Graph::isConnectedGraph() const {
-    if (getNumVertex() == 0) {
-        // An empty graph is considered connected
-        return true;
-    }
-
-    // Perform breadth-first search to check graph connectivity
-    std::unordered_set<int> visited; // Track visited vertices
-    std::queue<int> q;
-
-    // Choose an arbitrary starting vertex
-    auto vertex = findVertex(0);
-    q.push(0);
-    visited.insert(0);
-
-    while (!q.empty()) {
-        int currentVertex = q.front();
-        q.pop();
-
-        // Visit all adjacent vertices
-        for (const auto& edge : vertex->getAdj()) {
-            int nextVertex = edge->getDest()->getId();
-
-            if (visited.count(nextVertex) == 0) {
-                // Mark the vertex as visited and add it to the queue
-                visited.insert(nextVertex);
-                q.push(nextVertex);
-            }
-        }
-    }
-
-    // Check if all vertices have been visited
-    return visited.size() == getNumVertex();
-}
-
-Edge* Graph::getNonBridgeEdge(int vertex) const {
-    auto v = findVertex(vertex);
-    for (const auto& edge : v->getAdj()) {
-        // Temporarily remove the edge from the multigraph
-        v->deleteEdge(edge);
-
-        //Check if the removal of the edge disconnects the graph
-        bool isConnected = isConnectedGraph();
-
-        // Restore the edge to the multigraph
-        addEdge(edge->getOrig()->getId(),edge->getDest()->getId(),edge->getWeight());
-
-        // If the graph remains connected, return the non-bridge edge
-        if (isConnected) {
-            return edge;
-        }
-    }
-
-    return nullptr;  // No non-bridge edge found
-}
-int Graph::countConnectedComponents() const {
-    std::vector<bool> visited(getNumVertex(), false);
-    int count = 0;
-    for(auto vertex : getVertexSet()){
-        if(!vertex->isVisited()){
-            bfs();
-            count++;
-        }
-    }
-
-    return count;
-}
-bool Graph::isBridge(Edge* edge) {
-    // Store the original connectivity information
-    int initialComponents = countConnectedComponents();
-
-    // Remove the edge (u, v)
-    //findVertex(edge->getOrig()->getId())->removeEdge(edge->getDest()->getId());
-    findVertex(edge->getOrig()->getId())->deleteEdge(edge);
-
-    // Check the connectivity after removing the edge
-    int finalComponents = countConnectedComponents();
-
-    // Restore the edge (u, v)
-    addEdge(edge->getOrig()->getId(), edge->getDest()->getId(),edge->getWeight());
-
-    // If the number of components increases, the edge is a bridge
-    return finalComponents > initialComponents;
 }
 
 void Graph::MST(std::vector<int>& parent) {

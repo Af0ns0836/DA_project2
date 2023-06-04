@@ -39,13 +39,6 @@ public:
     void DFS(int current, const std::vector<int> &parent, std::vector<bool> &visited, std::stack<int> &cityStack, std::vector<int> &path);
     int minKey(std::vector<double> &key, std::vector<bool> &inMST);
     double totalDistance(const std::vector<int> &path);
-    int getNumberEdges();
-    void setNumberEdges(int n);
-    Edge* getNonBridgeEdge(int vertex) const;
-    bool isConnectedGraph() const;
-    bool isBridge(Edge*);
-    int countConnectedComponents() const;
-    void bfs() const;
     void resetNodes() const;
 protected:
     std::vector<Vertex *> vertexSet;    // vertex set
@@ -53,7 +46,6 @@ protected:
      * Finds the index of the vertex with a given content.
      */
     int findVertexIdx(const int &id) const;
-    int numberEdges;
 };
 
 

@@ -19,9 +19,10 @@ void Menu::menu(){
         cout << "1.Choose the dataset" << endl;
         cout << "2.Backtracking" << endl;
         cout << "3.Triangular Approximation" << endl;
+        cout << "4.Nearest Neighbor" << endl;
         cout << "Enter q to terminate the program or to return to a previous menu" << endl;
         cout << "Enter the respective number: ";
-        //cin >> option;
+        cin >> option;
         if(option == 'q') end = true;
 
         switch (option) {
@@ -30,46 +31,38 @@ void Menu::menu(){
                 break;
             case '2':{
 
-                string filename ="shipping";
-                tsp.readSmallDataSet(filename);
-                cout << tsp.getPaths();
-
-                //string filename ="tourism";
-                //tsp.readSmallDataSet(filename);
-
                 clock_t zero = clock();
 
                 cout << tsp.getPaths() << endl;
 
-                clock_t end = clock();
-                cout << "Time: " << double(end - zero) / CLOCKS_PER_SEC << " seconds" << endl;
+                clock_t ends = clock();
+                cout << "Time: " << double(ends - zero) / CLOCKS_PER_SEC << " seconds" << endl;
 
                 end = true;
                 break;
             }
-            case '3':
-                //string filename = "graph1";
-                //tsp.readBigDataSet(filename);
-                string filename = "edges_25";
-                tsp.readMediumDataSet(filename);
-                tsp.christofides();
-                end = true;
-                break;
-            /*case '4':
-
-                tsp.printMST(tsp.MST());
-
+            case '3': {
                 clock_t zero = clock();
 
                 double ans = tsp.triangularApproximation();
 
-                clock_t end = clock();
+                clock_t ends = clock();
 
                 cout << "Approximate Distance: " << ans << endl; //TODO
-                cout << "Time: " << double(end - zero) / CLOCKS_PER_SEC << " seconds" << endl;
+                cout << "Time: " << double(ends - zero) / CLOCKS_PER_SEC << " seconds" << endl;
 
                 end = true;
-                break;*/
+                break;
+            }
+            case '4':{
+                clock_t zero = clock();
+                tsp.nearestNeighborTSP();
+                clock_t ends = clock();
+                cout << "Time: " << double(ends - zero) / CLOCKS_PER_SEC << " seconds" << endl;
+
+                end = true;
+                break;
+            }
         }
     }
 }
@@ -82,8 +75,9 @@ void Menu::menu1(TSP *tsp) {
         cout << "#      Select dataset       #" << endl;
         cout << "#############################" << endl;
         cout << "1->The small graphs are the following: shipping, stadiums, tourism." << endl;
+        cout << "3->The medium fully connected graphs" << endl;
         cout << "2->The real world graphs are the following: graph1, graph2, graph3." << endl;
-        cout << "Choose the type of graph( 1 or 2 ): ";
+        cout << "Choose the type of graph( 1 ,2 or 3): ";
         cin >> option;
         switch (option) {
             case '1':
@@ -93,6 +87,13 @@ void Menu::menu1(TSP *tsp) {
                 end = true;
                 break;
             case '2':
+                cout << "Write the number of edges" << endl;
+                cout << "These are the available edges 25,50,75,100,200,300,400,500,600,700,800,900" << endl;
+                cin >> filename;
+                tsp->readMediumDataSet(filename);
+                end = true;
+                break;
+            case '3':
                 cout << "Write the name of the file: ";
                 cin >> filename;
                 tsp->readBigDataSet(filename);
@@ -104,42 +105,3 @@ void Menu::menu1(TSP *tsp) {
         }
     }
 }
-
-
-/*
-void Menu::menu3(TSP *tsp) {
-    bool end = false;
-    char option;
-    while(!end){
-        cout << "######################################" << endl;
-        cout << "# Triangular Approximation Heuristic #" << endl;
-        cout << "######################################" << endl;
-        cout << "1.Choose the dataset" << endl;
-        cout << "Enter q to terminate the program or to return to a previous menu" << endl;
-        cout << "Enter the respective number: ";
-        cin >> option;
-        if(option == 'q') end = true;
-        else if(option == '1'){
-
-        }
-    }
-}
-
-void Menu::menu4(TSP *tsp) {
-    bool end = false;
-    char option;
-    while(!end){
-        cout << "############################" << endl;
-        cout << "#     Other Heuristics     #" << endl;
-        cout << "############################" << endl;
-        cout << "1.Choose the dataset" << endl;
-        cout << "Enter q to terminate the program or to return to a previous menu" << endl;
-        cout << "Enter the respective number: ";
-        cin >> option;
-        if(option == 'q') end = true;
-        else if(option == '1'){
-
-        }
-    }
-}
- */
