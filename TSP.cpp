@@ -211,10 +211,10 @@ set<Vertex*> TSP::oddDegree(Graph* mstGraph){
             odds.insert(v);
         }
     }
-    delete mstGraph;
+    //delete mstGraph;
     return odds;
 }
-Graph* TSP::oddGraph(set<Vertex*> odds){
+/*Graph* TSP::oddGraph(set<Vertex*> odds){
     Graph* oddGraph = new Graph();
     double weight;
     for(auto v : odds){
@@ -222,6 +222,7 @@ Graph* TSP::oddGraph(set<Vertex*> odds){
         for(auto u : odds){
             if (u != v) {
                 if(u->hasEdge(u,v)){
+                    auto s = u->getAdj().size();
                     for (auto neighbor : u->getAdj()) {
                         if (neighbor->getDest() == v) {
                             weight = neighbor->getWeight();  // Found an edge
@@ -239,7 +240,7 @@ Graph* TSP::oddGraph(set<Vertex*> odds){
         }
     }
 
-}
+}*/
 double TSP::computeWeight(Vertex* u, Vertex* v) {
 
     double lat1 = u->getLat();
@@ -313,12 +314,11 @@ bool TSP::isPerfectMatching(const vector<pair<int, int>>& matching) {
     }
     return vertices.size() == graph->getNumVertex();
 }
-vector<pair<int, int>> TSP::bruteForcePerfectMatching(const Graph* graph) {
+vector<pair<int, int>> TSP::bruteForcePerfectMatching(set<Vertex*> odds) {
     vector<pair<int, int>> matching;
     vector<pair<int, int>> allEdges;
-
     // Generate all possible combinations of edges
-    for (const auto& entry : graph->getVertexSet()) {
+    for (const auto& entry : odds) {
         int u = entry->getId();
         for (const auto& v : entry->getAdj()) {
             allEdges.emplace_back(u, v->getDest()->getId());
@@ -326,7 +326,7 @@ vector<pair<int, int>> TSP::bruteForcePerfectMatching(const Graph* graph) {
     }
 
     // Iterate over all possible matchings
-    int n = graph->getNumVertex();
+    int n = odds.size();
     for (int r = n / 2; r <= n; ++r) {  // Consider matchings of size n/2 to n
         vector<bool> chosen(allEdges.size(), false);
         fill(chosen.end() - r, chosen.end(), true);
@@ -391,7 +391,7 @@ void TSP::performFleuryAlgorithm(int currentVertex, Graph& multigraph, vector<in
 
 void TSP::christofides() {
     //Creation of the odd degree Graph from the MST
-    auto oddG = oddGraph(oddDegree(MST()));
+    auto oddG = oddDegree(MST());
     //Step to build the Eulerian multigraph
     auto perfect_matching = bruteForcePerfectMatching(oddG);
     auto multigraph = MST(); // Start with the MST

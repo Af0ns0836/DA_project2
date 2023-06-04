@@ -11,7 +11,7 @@ void Menu::menu(){
     TSP tsp = TSP();
 
     bool end = false;
-    char option;
+    char option = '3';
     while(!end){
         cout << "#############################" << endl;
         cout << "#         MAIN MENU         #" << endl;
@@ -21,7 +21,7 @@ void Menu::menu(){
         cout << "3.Triangular Approximation" << endl;
         cout << "Enter q to terminate the program or to return to a previous menu" << endl;
         cout << "Enter the respective number: ";
-        cin >> option;
+        //cin >> option;
         if(option == 'q') end = true;
 
         switch (option) {
@@ -48,14 +48,15 @@ void Menu::menu(){
                 break;
             }
             case '3':
-                tsp.christofides();
-                break;
-            case '4':
-                string filename = "graph1";
-                tsp.readMediumDataSet("edges_25");
+                //string filename = "graph1";
                 //tsp.readBigDataSet(filename);
-                /*double ans;
-                tsp.simulatedAnnealing(ans);*/
+                string filename = "edges_25";
+                tsp.readMediumDataSet(filename);
+                tsp.christofides();
+                end = true;
+                break;
+            /*case '4':
+
                 tsp.printMST(tsp.MST());
 
                 clock_t zero = clock();
@@ -68,7 +69,7 @@ void Menu::menu(){
                 cout << "Time: " << double(end - zero) / CLOCKS_PER_SEC << " seconds" << endl;
 
                 end = true;
-                break;
+                break;*/
         }
     }
 }

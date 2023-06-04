@@ -30,7 +30,7 @@ public:
     Graph* MST();
     void printMST(Graph* mstGraph);
     set<Vertex*> oddDegree(Graph* mstGraph);
-    Graph* oddGraph(set<Vertex*> odds);
+    //Graph* oddGraph(set<Vertex*> odds);
     double computeWeight(Vertex* u, Vertex* v);
     double haversine(double lat1,double lon1,double lat2,double lon2);
     void christofides();
@@ -39,7 +39,7 @@ public:
     bool isPerfectMatching(const vector<pair<int, int>>& matching);
     bool isValidMatching(const vector<pair<int, int>>& matching);
     void constructEulerianCircuit(Graph* &multigraph);
-    vector<pair<int, int>> bruteForcePerfectMatching(const Graph* graph);
+    vector<pair<int, int>> bruteForcePerfectMatching(set<Vertex*> odds);
     void performFleuryAlgorithm(int currentVertex, Graph& multigraph, vector<int>& circuit);
 };
 
