@@ -28,9 +28,9 @@ void Menu::menu(){
             case '1':
                 menu1(&tsp);
                 break;
-            case '2':{
+            case '2': {
 
-                string filename ="shipping";
+                string filename = "shipping";
                 tsp.readSmallDataSet(filename);
                 cout << tsp.getPaths();
 
@@ -47,9 +47,20 @@ void Menu::menu(){
                 end = true;
                 break;
             }
-            case '3':
-                tsp.christofides();
+            case '3': {
+                clock_t zero = clock();
+
+                double ans = tsp.triangularApproximation();
+
+                clock_t end = clock();
+
+                cout << "Approximate Distance: " << ans << endl; //TODO
+                cout << "Time: " << double(end - zero) / CLOCKS_PER_SEC << " seconds" << endl;
+
+                end = true;
+
                 break;
+            }
             case '4':
                 string filename = "graph1";
                 tsp.readMediumDataSet("edges_25");

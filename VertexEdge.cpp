@@ -82,20 +82,7 @@ bool Vertex::hasEdge(Vertex* vertex1, Vertex* vertex2) {
     return false;  // Edge not found
 }
 
-void Vertex::deleteEdge(Edge *edge) {
-    Vertex *dest = edge->getDest();
-    // Remove the corresponding edge from the incoming list
-    auto it = dest->incoming.begin();
-    while (it != dest->incoming.end()) {
-        if ((*it)->getOrig()->getId() == id) {
-            it = dest->incoming.erase(it);
-        }
-        else {
-            it++;
-        }
-    }
-    delete edge;
-}
+
 /********************** Edge  ****************************/
 
 Edge::Edge(Vertex *orig, Vertex *dest, double w): orig(orig), dest(dest), weight(w) {}
@@ -127,8 +114,4 @@ void Edge::setSelected(bool selected) {
 
 void Edge::setReverse(Edge *reverse) {
     this->reverse = reverse;
-}
-
-void Edge::setVisited(bool visited) {
-    this->visited = visited;
 }

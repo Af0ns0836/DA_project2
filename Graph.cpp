@@ -1,13 +1,13 @@
 // By: Gonçalo Leão
 
-#include <unordered_set>
+#include <cmath>
 #include "Graph.h"
 
 int Graph::getNumVertex() const {
     return vertexSet.size();
 }
 
-std::vector<Vertex *> Graph::getVertexSet() const {
+std::unordered_map<int, Vertex*> Graph::getVertexSet() const {
     return vertexSet;
 }
 
@@ -16,8 +16,9 @@ std::vector<Vertex *> Graph::getVertexSet() const {
  */
 Vertex * Graph::findVertex(const int &id) const {
     for (auto v : vertexSet)
-        if (v->getId() == id)
-            return v;
+        if (v.second->getId() == id) {
+            return v.second;
+        }
     return nullptr;
 }
 
@@ -26,7 +27,7 @@ Vertex * Graph::findVertex(const int &id) const {
  */
 int Graph::findVertexIdx(const int &id) const {
     for (unsigned i = 0; i < vertexSet.size(); i++)
-        if (vertexSet[i]->getId() == id)
+        if (findVertex(id)->getId() == id)
             return i;
     return -1;
 }
@@ -35,9 +36,10 @@ int Graph::findVertexIdx(const int &id) const {
  *  Returns true if successful, and false if a vertex with that content already exists.
  */
 bool Graph::addVertex(const int &id) {
-    if (findVertex(id) != nullptr)
+    if (findVertex(id) != nullptr) {
         return false;
-    vertexSet.push_back(new Vertex(id));
+    }
+    vertexSet[id] = new Vertex(id);
     return true;
 }
 
@@ -46,29 +48,13 @@ bool Graph::addVertex(const int &id) {
  * destination vertices and the edge weight (w).
  * Returns true if successful, and false if the source or destination vertex does not exist.
  */
-bool Graph::addEdge(const int &sourc, const int &dest, double w) const {
+bool Graph::addEdge(const int &sourc, const int &dest, double w) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
         return false;
     v1->addEdge(v2, w);
     return true;
-}
-/**
- * Resets the nodes' visited, path and cost values.
- */
-void Graph::resetNodes() const {
-    for (auto v: getVertexSet()) {
-        v->setVisited(false);
-        v->setPath(nullptr);
-
-        for (Edge *e: v->getAdj()) {
-            e->setVisited(false);
-        }
-    }
-}
-void Graph::setNumberEdges(int n) {
-    this->numberEdges = n;
 }
 bool Graph::addBidirectionalEdge(const int &sourc, const int &dest, double w) {
     auto v1 = findVertex(sourc);
@@ -82,123 +68,8 @@ bool Graph::addBidirectionalEdge(const int &sourc, const int &dest, double w) {
     return true;
 }
 
-int Graph::getNumberEdges() {
-    return this->numberEdges;
-}
-void Graph::bfs() const {
-    // Get the source vertex
-    auto s = findVertex(0);
-    if (s == nullptr) {
-        return;
-    }
-
-    // Set that no vertex has been visited yet
-    for (auto v : vertexSet) {
-        v->setVisited(false);
-    }
-
-    // Perform the actual BFS using a queue
-    std::queue<Vertex *> q;
-    q.push(s);
-    s->setVisited(true);
-    while (!q.empty()) {
-        auto v = q.front();
-        q.pop();
-        for (auto & e : v->getAdj()) {
-            auto w = e->getDest();
-            if ( ! w->isVisited()) {
-                q.push(w);
-                w->setVisited(true);
-            }
-        }
-    }
-}
-bool Graph::isConnectedGraph() const {
-    if (getNumVertex() == 0) {
-        // An empty graph is considered connected
-        return true;
-    }
-
-    // Perform breadth-first search to check graph connectivity
-    std::unordered_set<int> visited; // Track visited vertices
-    std::queue<int> q;
-
-    // Choose an arbitrary starting vertex
-    auto vertex = findVertex(0);
-    q.push(0);
-    visited.insert(0);
-
-    while (!q.empty()) {
-        int currentVertex = q.front();
-        q.pop();
-
-        // Visit all adjacent vertices
-        for (const auto& edge : vertex->getAdj()) {
-            int nextVertex = edge->getDest()->getId();
-
-            if (visited.count(nextVertex) == 0) {
-                // Mark the vertex as visited and add it to the queue
-                visited.insert(nextVertex);
-                q.push(nextVertex);
-            }
-        }
-    }
-
-    // Check if all vertices have been visited
-    return visited.size() == getNumVertex();
-}
-
-Edge* Graph::getNonBridgeEdge(int vertex) const {
-    auto v = findVertex(vertex);
-    for (const auto& edge : v->getAdj()) {
-        // Temporarily remove the edge from the multigraph
-        v->deleteEdge(edge);
-
-        //Check if the removal of the edge disconnects the graph
-        bool isConnected = isConnectedGraph();
-
-        // Restore the edge to the multigraph
-        addEdge(edge->getOrig()->getId(),edge->getDest()->getId(),edge->getWeight());
-
-        // If the graph remains connected, return the non-bridge edge
-        if (isConnected) {
-            return edge;
-        }
-    }
-
-    return nullptr;  // No non-bridge edge found
-}
-int Graph::countConnectedComponents() const {
-    std::vector<bool> visited(getNumVertex(), false);
-    int count = 0;
-    for(auto vertex : getVertexSet()){
-        if(!vertex->isVisited()){
-            bfs();
-            count++;
-        }
-    }
-
-    return count;
-}
-bool Graph::isBridge(Edge* edge) {
-    // Store the original connectivity information
-    int initialComponents = countConnectedComponents();
-
-    // Remove the edge (u, v)
-    //findVertex(edge->getOrig()->getId())->removeEdge(edge->getDest()->getId());
-    findVertex(edge->getOrig()->getId())->deleteEdge(edge);
-
-    // Check the connectivity after removing the edge
-    int finalComponents = countConnectedComponents();
-
-    // Restore the edge (u, v)
-    addEdge(edge->getOrig()->getId(), edge->getDest()->getId(),edge->getWeight());
-
-    // If the number of components increases, the edge is a bridge
-    return finalComponents > initialComponents;
-}
-
 void Graph::MST(std::vector<int>& parent) {
+
 
     std::vector<double> key(getNumVertex(), std::numeric_limits<double>::max()); //Tracks values of the
     std::vector<bool> inMST(getNumVertex(), false); //Tracks vertices already in the MST
@@ -209,8 +80,17 @@ void Graph::MST(std::vector<int>& parent) {
     //Start key vector with the key value
     key[startVertex] = 0.0;
 
-    for (int count = 0; count < getNumVertex() - 1; ++count) {
-        int u = minKey(key, inMST);
+    // Priority queue to store vertices with their corresponding key values
+    std::priority_queue<std::pair<double, int>, std::vector<std::pair<double, int>>, std::greater<std::pair<double, int>>> pq;
+    pq.push(std::make_pair(0.0, startVertex));
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+
+        if (inMST[u])
+            continue;
+
         inMST[u] = true;
 
         // Update key and parent index of adjacent vertices
@@ -218,17 +98,18 @@ void Graph::MST(std::vector<int>& parent) {
             int v = edge->getDest()->getId();
             double weight = edge->getWeight();
 
-
             if (!inMST[v] && weight < key[v]) {
                 parent[v] = u;
                 key[v] = weight;
+                pq.push(std::make_pair(weight, v));
             }
         }
     }
-
+    std::vector<std::pair<int, int>> mst;
     // Print the MST
     std::cout << "Minimum Spanning Tree:" << std::endl;
     for (int i = 1; i < getNumVertex(); ++i) {
+        mst.push_back(std::make_pair(parent[i], i));
         std::cout << parent[i] << " - " << i << std::endl;
     }
 
@@ -254,32 +135,91 @@ void Graph::DFS(int current, const std::vector<int> &parent, std::vector<bool> &
     }
 }
 
-int Graph::minKey(std::vector<double> &key, std::vector<bool> &inMST){
-    double min = std::numeric_limits<double>::max();
-    int minValue = -1; //Minimum value possible
-    int numVertices = key.size();
 
-    for (int v = 0; v < numVertices; ++v) {
-        if (!inMST[v] && key[v] < min) {
-            min = key[v];
-            minValue = v;
+double Graph::totalDistance(const std::vector<int> &path) {
+    double totalDistance = 0.0;
+
+    // Calculate the total distance
+    for (int i = 0; i < path.size() - 1; ++i) {
+        int v1 = path[i];
+        int v2 = path[i + 1];
+
+        if(!check_if_nodes_are_connected(v1, v2)){
+            totalDistance = haversine(findVertex(v1)->getLat(), findVertex(v1)->getLon(), findVertex(v2)->getLat(), findVertex(v2)->getLon());
+            continue;
+        }
+
+        for (auto edge : findVertex(v1)->getAdj()) {
+            if (edge->getDest()->getId() == v2) {
+                totalDistance += edge->getWeight();
+                break;
+            }
         }
     }
 
-    return minValue;
-}
-
-
-double Graph::totalDistance(const std::vector<int> &path) {
-    //TODO
-}
-
-Graph::~Graph() {
-    for (auto vertex : vertexSet) {
-        delete vertex;
+    //add final distance to total distance
+    int final_city = path.back();
+    if(!check_if_nodes_are_connected(final_city, path[0])){
+        totalDistance += haversine(findVertex(final_city)->getLat(), findVertex(final_city)->getLon(), findVertex(path[0])->getLat(), findVertex(path[0])->getLon());
     }
+    else{
+        for(auto edge : findVertex(final_city)->getAdj()){
+            if(edge->getDest()->getId() == path[0]){
+                totalDistance += edge->getWeight();
+                break;
+            }
+        }
+    }
+
+    return totalDistance;
 }
 
 
+
+bool Graph::check_if_nodes_are_connected(int v1, int v2){
+    int index_v1;
+    //iterate through vertices to find index of v1
+
+    for(auto it = vertexSet.begin(); it != vertexSet.end(); ++it){
+        if(it->second->getId() == v1){
+            index_v1 = it->first;
+            break;
+        }
+    }
+
+    for(auto edge : findVertex(index_v1)->getAdj()){
+        if(edge->getDest()->getId() == v2){
+            return true;
+        }
+    }
+    return false;
+}
+
+
+double Graph::degrees_to_radians(double degrees){
+    return degrees * M_PI / 180;
+}
+
+double Graph::haversine(double lat1, double lon1, double lat2, double lon2){
+    if (lat1 == 0 && lon1 == 0 && lat2 == 0 && lon2 == 0) {
+        return 0.0;
+    }
+
+    double lat1Rad = degrees_to_radians(lat1);
+    double lon1Rad = degrees_to_radians(lon1);
+    double lat2Rad = degrees_to_radians(lat2);
+    double lon2Rad = degrees_to_radians(lon2);
+
+    double dLat = lat2Rad - lat1Rad;
+    double dLon = lon2Rad - lon1Rad;
+
+    double a = std::sin(dLat / 2.0) * std::sin(dLat / 2.0) +
+               std::cos(lat1Rad) * std::cos(lat2Rad) *
+               std::sin(dLon / 2.0) * std::sin(dLon / 2.0);
+    double c = 2.0 * std::atan2(std::sqrt(a), std::sqrt(1.0 - a));
+    double distance = RADIUS * c;
+
+    return distance;
+}
 
 

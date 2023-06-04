@@ -7,7 +7,6 @@
 
 #include "Graph.h"
 #include "set"
-#include "unordered_map"
 
 using namespace std;
 
@@ -34,13 +33,13 @@ public:
     double computeWeight(Vertex* u, Vertex* v);
     double haversine(double lat1,double lon1,double lat2,double lon2);
     void christofides();
-    int findAlternativeNonBridgeEdge(int currentVertex, const Graph& multigraph);
+    /*vector<int> simulatedAnnealing(double& ans);
+    bool acceptanceFunction(double &t, double &vE);
+    vector<int> generate_initial_solution(double& min_distance);
+    vector<int> nearest_neighbor();
+    double DFS(vector<int> &canSol,int id);*/
     double triangularApproximation();
-    bool isPerfectMatching(const vector<pair<int, int>>& matching);
-    bool isValidMatching(const vector<pair<int, int>>& matching);
-    void constructEulerianCircuit(Graph* &multigraph);
-    vector<pair<int, int>> bruteForcePerfectMatching(const Graph* graph);
-    void performFleuryAlgorithm(int currentVertex, Graph& multigraph, vector<int>& circuit);
+
 };
 
 #endif //DA_PROJECT2_TSP_H

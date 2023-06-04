@@ -64,7 +64,7 @@ void TSP::readMediumDataSet(const string& filename) {
 
 
 void TSP::readBigDataSetNodes(const string& filename) {
-    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/graph1/nodes.csv");
+    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/"+filename);
     string line;
     int id;
     double latitude,longitude;
@@ -83,9 +83,9 @@ void TSP::readBigDataSetNodes(const string& filename) {
 }
 
 void TSP::readBigDataSetEdges(const string &filename) {
-    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/graph1/edges.csv");
+    ifstream s("../Project2Graphs/Project2Graphs/Real-World-Graphs/"+filename);
     string line;
-    int origem,destino,nEdges = 0;
+    int origem,destino;
     double distancia;
     getline(s,line);
     while(getline(s,line)){
@@ -97,9 +97,7 @@ void TSP::readBigDataSetEdges(const string &filename) {
         getline(ss,line,',');
         distancia = stod(line);
         graph->addBidirectionalEdge(origem,destino,distancia);
-        nEdges++;
     }
-    graph->setNumberEdges(nEdges);
 }
 void TSP::readBigDataSet(const string& filename){
     readBigDataSetNodes(filename + "/nodes.csv");
@@ -127,6 +125,7 @@ void TSP::backtracking(int count, double cost, double& ans, int id,vector<int>& 
         }
         return;
     }
+
     for (auto edge : vertex->getAdj()) {
         if(!edge->getDest()->isVisited()){
             edge->getDest()->setVisited(true);
@@ -151,6 +150,7 @@ double TSP::getPaths()
     cout << endl;
     return ans;
 }
+
 Graph* TSP::MST() {
     if (graph->getVertexSet().empty()) {
         return nullptr;
@@ -160,13 +160,13 @@ Graph* TSP::MST() {
 
     // Reset auxiliary info
     for (auto v : graph->getVertexSet()) {
-        v->setDist(INF);
-        v->setPath(nullptr);
-        v->setVisited(false);
+        v.second->setDist(INF);
+        v.second->setPath(nullptr);
+        v.second->setVisited(false);
     }
 
     // Start with an arbitrary vertex
-    Vertex* s = graph->getVertexSet().front();
+    Vertex* s = graph->getVertexSet().at(0);
     s->setDist(0);
 
     // Initialize priority queue
@@ -206,12 +206,12 @@ Graph* TSP::MST() {
 set<Vertex*> TSP::oddDegree(Graph* mstGraph){
     set<Vertex*> odds;
     for(auto v : mstGraph->getVertexSet()){
-        int degree = v->getAdj().size();
+        int degree = v.second->getAdj().size();
         if (degree % 2 == 1) {
-            odds.insert(v);
+            odds.insert(v.second);
         }
     }
-    delete mstGraph;
+    //delete mstGraph;
     return odds;
 }
 Graph* TSP::oddGraph(set<Vertex*> odds){
@@ -240,6 +240,7 @@ Graph* TSP::oddGraph(set<Vertex*> odds){
     }
 
 }
+
 double TSP::computeWeight(Vertex* u, Vertex* v) {
 
     double lat1 = u->getLat();
@@ -265,153 +266,6 @@ double TSP::haversine(double lat1,double lon1,double lat2,double lon2){
     double d = earth_R * c;
     return d;
 }
-int TSP::findAlternativeNonBridgeEdge(int currentVertex, const Graph& multigraph) {
-    for (const auto& edge : multigraph.findVertex(currentVertex)->getAdj()) {
-        // Temporarily remove the edge from the multigraph
-        multigraph.findVertex(currentVertex)->deleteEdge(edge);
-
-        // Check if the removal of the edge creates a bridge
-        if (!multigraph.isConnectedGraph()) {
-            // Restore the removed edge and continue to the next edge
-            multigraph.addEdge(edge->getOrig()->getId(),edge->getDest()->getId(),edge->getWeight());
-            continue;
-        }
-
-        // The removed edge is not a bridge, so return the other vertex of the edge
-        int otherVertex = edge->getDest()->getId();
-        return otherVertex;
-    }
-
-    // No alternative non-bridge edge found
-    return -1; // Or any appropriate indication of failure
-}
-bool TSP::isValidMatching(const vector<pair<int, int>>& matching) {
-    // Check if the matching is valid
-    unordered_map<int, int> vertices;
-    for (const auto& edge : matching) {
-        int u = edge.first;
-        int v = edge.second;
-        if (vertices.count(u) || vertices.count(v)) {
-            return false;
-        }
-        vertices[u] = 1;
-        vertices[v] = 1;
-    }
-    return true;
-}
-bool TSP::isPerfectMatching(const vector<pair<int, int>>& matching) {
-    // Check if the matching is a perfect matching
-    unordered_map<int, int> vertices;
-    for (const auto& edge : matching) {
-        int u = edge.first;
-        int v = edge.second;
-        if (vertices.count(u) || vertices.count(v)) {
-            return false;
-        }
-        vertices[u] = 1;
-        vertices[v] = 1;
-    }
-    return vertices.size() == graph->getNumVertex();
-}
-vector<pair<int, int>> TSP::bruteForcePerfectMatching(const Graph* graph) {
-    vector<pair<int, int>> matching;
-    vector<pair<int, int>> allEdges;
-
-    // Generate all possible combinations of edges
-    for (const auto& entry : graph->getVertexSet()) {
-        int u = entry->getId();
-        for (const auto& v : entry->getAdj()) {
-            allEdges.emplace_back(u, v->getDest()->getId());
-        }
-    }
-
-    // Iterate over all possible matchings
-    int n = graph->getNumVertex();
-    for (int r = n / 2; r <= n; ++r) {  // Consider matchings of size n/2 to n
-        vector<bool> chosen(allEdges.size(), false);
-        fill(chosen.end() - r, chosen.end(), true);
-
-        do {
-            matching.clear();
-            for (int i = 0; i < allEdges.size(); ++i) {
-                if (chosen[i]) {
-                    matching.push_back(allEdges[i]);
-                }
-            }
-            if (isValidMatching(matching) && isPerfectMatching(matching)) {
-                return matching;
-            }
-        } while (next_permutation(chosen.begin(), chosen.end()));
-    }
-
-    return {};  // No perfect matching found
-}
-void TSP::constructEulerianCircuit(Graph* &multigraph) {
-    vector<int> circuit; // Store the Eulerian circuit
-
-    // Step 1: Choose a starting vertex
-    int startVertex = 0; // Choose any vertex as the starting vertex
-
-    // Step 2: Perform Fleury's algorithm
-    performFleuryAlgorithm(startVertex, reinterpret_cast<Graph &>(multigraph), circuit);
-    for(int v : circuit){
-        cout << v << " ";
-    }
-}
-void TSP::performFleuryAlgorithm(int currentVertex, Graph& multigraph, vector<int>& circuit) {
-    while (multigraph.getNumberEdges() > 0) {
-        // Step 3: Choose an edge from the current vertex that is not a bridge
-        Edge* chosenEdge = multigraph.getNonBridgeEdge(currentVertex);
-
-        // Step 4: Mark the chosen edge as visited
-        //multigraph.findVertex(currentVertex)->removeEdge(chosenEdge->getDest()->getId());
-        multigraph.findVertex(currentVertex)->deleteEdge(chosenEdge);
-        // Step 5: Add the current vertex to the circuit
-        circuit.push_back(currentVertex);
-
-        // Move to the other vertex of the chosen edge
-        int nextVertex = chosenEdge->getDest()->getId();
-
-        // If the chosen edge was a bridge, find an alternative non-bridge edge
-        if (multigraph.isBridge(chosenEdge)) {
-            multigraph.addEdge(chosenEdge->getOrig()->getId(),chosenEdge->getDest()->getId(),chosenEdge->getWeight());
-            // Restore the removed bridge edge
-
-            // Find an alternative non-bridge edge using a depth-first search
-            nextVertex = findAlternativeNonBridgeEdge(currentVertex, multigraph);
-        }
-
-        // Move to the next vertex
-        currentVertex = nextVertex;
-    }
-
-    // Step 6: Add the final vertex to complete the circuit
-    circuit.push_back(currentVertex);
-}
-
-void TSP::christofides() {
-    //Creation of the odd degree Graph from the MST
-    auto oddG = oddGraph(oddDegree(MST()));
-    //Step to build the Eulerian multigraph
-    auto perfect_matching = bruteForcePerfectMatching(oddG);
-    auto multigraph = MST(); // Start with the MST
-
-    for (const auto& pair : perfect_matching) {
-        int source = pair.first;
-        int vertexDestination = pair.second;
-
-        // Retrieve the actual vertices and weight associated with the IDs
-        double weight = haversine(multigraph->findVertex(source)->getLat(),multigraph->findVertex(source)->getLon(),
-        multigraph->findVertex(vertexDestination)->getLat(),multigraph->findVertex(vertexDestination)->getLon());
-        // Add the edge to the multigraph
-        multigraph->addEdge(source, vertexDestination, weight);
-    }
-
-    // At this point, the multigraph contains duplicated edges and has even degree vertices
-    // Proceed to step 5 to construct an Eulerian circuit in the multigraph
-    constructEulerianCircuit(multigraph);
-}
-
 void TSP::printMST(Graph* mstGraph) {
     if (mstGraph == nullptr) {
         std::cout << "MST is empty." << std::endl;
@@ -421,14 +275,150 @@ void TSP::printMST(Graph* mstGraph) {
     std::cout << "Minimum Spanning Tree (MST):" << std::endl;
 
     for (auto v : mstGraph->getVertexSet()) {
-        std::cout << "Vertex " << v->getId() << ":" << std::endl;
+        std::cout << "Vertex " << v.second->getId() << ":" << std::endl;
 
-        for (auto e : v->getAdj()) {
+        for (auto e : v.second->getAdj()) {
             std::cout << "  Connected to Vertex " << e->getDest()->getId();
             std::cout << " with weight " << e->getWeight() << std::endl;
         }
     }
 }
+/*
+double TSP::DFS(vector<int> &canSol,int id) {
+    double min_dist = 0.0;
+    stack<int> stack;
+    auto vertex = graph->findVertex(id);
+    vertex->setVisited(true);
+    stack.push(vertex->getId());
+    canSol.push_back(0);
+
+    while (!stack.empty()) {
+        int curVertex = stack.top();
+        vertex = graph->findVertex(curVertex);
+        stack.pop();
+
+        // Visit all adjacent vertices of the current vertex
+        random_device rd;
+        std::mt19937 g(rd());
+        std::shuffle(vertex->getAdj().begin(), vertex->getAdj().end(), g);
+        for (auto edge : vertex->getAdj()) {
+            if (!edge->getDest()->isVisited()) {
+                edge->getDest()->setVisited(true);
+                min_dist += edge->getWeight();
+                canSol.push_back(edge->getDest()->getId());
+                stack.push(edge->getDest()->getId());
+            }
+        }
+    }
+    return min_dist;
+}
+
+
+vector<int> TSP::simulatedAnnealing(double &ans) {
+    double t = 100;
+    double tmin = 0.01;
+    double alfa = 0.9;
+    int id = 0;
+    double min_distance = std::numeric_limits<double>::max();
+    vector<int> candSol; //= generate_initial_solution(min_distance);
+    double energy = DFS(candSol,id);
+            //min_distance;
+    double eThreshold = 0;
+    while(t > tmin && energy > eThreshold){
+        //vector<int> newSol = generate_initial_solution(min_distance);
+        //double vE = min_distance - energy;
+        vector<int> newSol;
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> distribution(0, graph->getNumVertex());
+        double vE = DFS(newSol,distribution(gen)) - energy;
+        if (acceptanceFunction(t,vE)){
+            candSol = newSol;
+            energy = min_distance;
+        }
+        t = t/alfa;
+    }
+    return candSol;
+}
+
+bool TSP::acceptanceFunction(double &t, double &vE) {
+    random_device rd;
+    mt19937  gen(rd());
+    uniform_real_distribution<double> dis(0.0,1.0);
+    if(vE < 0){
+        return true;
+    }
+    else{
+        double r = dis(gen);
+        if( r < exp(-vE/t)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
+vector<int> TSP::generate_initial_solution(double& min_distance) {
+    int num_cities = graph->getNumVertex();
+    std::vector<int> solution(num_cities);
+
+    std::vector<bool> visited(num_cities, false);
+    visited[0] = true;
+    solution[0] = 0;
+
+    for (int i = 1; i < num_cities; ++i) {
+        int current_city = solution[i - 1];
+        int nearest_city = -1;
+
+        for (const auto& neighbor : graph->findVertex(current_city)->getAdj()) {
+            int city = neighbor->getDest()->getId();
+            double distance = neighbor->getWeight();
+
+            if (!visited[city] && distance < min_distance) {
+                min_distance = distance;
+                nearest_city = city;
+            }
+        }
+
+        solution[i] = nearest_city;
+        visited[nearest_city] = true;
+    }
+
+    return solution;
+}
+
+
+vector<int> TSP::nearest_neighbor() {
+    int num_cities = graph->getNumVertex();
+    std::vector<int> solution;
+    std::vector<bool> visited(num_cities, false);
+
+    // Start with the specified city
+    int current_city = 0;
+    solution.push_back(current_city);
+    visited[current_city] = true;
+
+    // Repeat until all cities are visited
+    while (solution.size() < num_cities) {
+        int nearest_city = -1;
+        int min_distance = std::numeric_limits<int>::max();
+
+        // Find the nearest unvisited city
+        for (int city = 0; city < num_cities; ++city) {
+            if (!visited[city] && graph->findVertex(current_city)->getAdj()[city]->getWeight() < min_distance){//distances[current_city][city] < min_distance) {
+                nearest_city = city;
+                min_distance = graph->findVertex(current_city)->getAdj()[city]->getWeight();
+            }
+        }
+
+        // Add the nearest city to the solution
+        solution.push_back(nearest_city);
+        visited[nearest_city] = true;
+        current_city = nearest_city;
+    }
+
+    return solution;
+}*/
 
 double TSP::triangularApproximation() {
     // PRIM'S ALGORITHM - Find the Minimum Spamming Tree
@@ -451,9 +441,12 @@ double TSP::triangularApproximation() {
     }
     cout << " -> 0"<< endl;
 
-    //TODO - Find the distance
     double total_distance = graph->totalDistance(pathValues);
 
-    //return total_distance;
-    return 0;
+    return total_distance;
 }
+
+/*void TSP::setPath(vector<double> paths) {
+    this->path = paths;
+}*/
+

@@ -1,4 +1,4 @@
-"D:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S C:\Users\35191\Desktop\DA_project2-main -B C:\Users\35191\Desktop\DA_project2-main\cmake-build-debug
+"D:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S "C:\Users\35191\Desktop\DA_project2-main (5) - Copy\DA_project2-main" -B "C:\Users\35191\Desktop\DA_project2-main (5) - Copy\DA_project2-main\cmake-build-debug"
 -- The C compiler identification is GNU 11.2.0
 -- The CXX compiler identification is GNU 11.2.0
 -- Detecting C compiler ABI info
@@ -13,4 +13,4 @@
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/35191/Desktop/DA_project2-main/cmake-build-debug
+-- Build files have been written to: C:/Users/35191/Desktop/DA_project2-main (5) - Copy/DA_project2-main/cmake-build-debug
