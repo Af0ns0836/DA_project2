@@ -53,10 +53,10 @@ RM = "D:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\35191\Desktop\DA_project2-main
+CMAKE_SOURCE_DIR = "C:\Users\35191\Desktop\DA_project2-main (6)\DA_project2-main"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\35191\Desktop\DA_project2-main\cmake-build-debug
+CMAKE_BINARY_DIR = "C:\Users\35191\Desktop\DA_project2-main (6)\DA_project2-main\cmake-build-debug"
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -80,14 +80,14 @@ clean: CMakeFiles/DA_project2.dir/clean
 CMakeFiles/DA_project2.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DA_project2.dir\build.make CMakeFiles/DA_project2.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DA_project2.dir\build.make CMakeFiles/DA_project2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\35191\Desktop\DA_project2-main\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6 "Built target DA_project2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\35191\Desktop\DA_project2-main (6)\DA_project2-main\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6 "Built target DA_project2"
 .PHONY : CMakeFiles/DA_project2.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/DA_project2.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\35191\Desktop\DA_project2-main\cmake-build-debug\CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\35191\Desktop\DA_project2-main (6)\DA_project2-main\cmake-build-debug\CMakeFiles" 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/DA_project2.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\35191\Desktop\DA_project2-main\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\35191\Desktop\DA_project2-main (6)\DA_project2-main\cmake-build-debug\CMakeFiles" 0
 .PHONY : CMakeFiles/DA_project2.dir/rule
 
 # Convenience name for target.

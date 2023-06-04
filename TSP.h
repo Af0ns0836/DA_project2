@@ -27,10 +27,6 @@ public:
     Graph * getGraph();
     void backtracking(int count, double cost, double& ans, int id,vector<int>& paths,vector<int>& minPath);
     double getPaths();
-    Graph* MST();
-    //Graph* oddGraph(set<Vertex*> odds);
-    double computeWeight(Vertex* u, Vertex* v);
-    double haversine(double lat1,double lon1,double lat2,double lon2);
     double triangularApproximation();
     void nearestNeighborTSP();
 };
